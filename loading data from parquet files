@@ -1,0 +1,16 @@
+from pyspark.sql.types import *
+
+path = "abcd/data/full/
+
+def loadFullDataFromSource(table_name):
+    df = spark.read.format("parquet").load("Files/"+ path + table_name)
+    df.write.mode("overwrite").format("delta").save("Tables/" + table_name)
+
+tables = [
+    "dim_a",
+    "dim_b",
+    "dim_c"
+    ]
+
+for table in tables:
+    loadFullDataFromSource(table_name)
